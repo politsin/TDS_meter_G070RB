@@ -102,7 +102,7 @@ int32_t ecKoefB = 90;     //  Beta value                                        
 int32_t ecKoefC = 34;     //  С-value                                              [N
 int32_t ecKoefT = 1;      //  Ноль Koef Temperature                                [P
 
-uint32_t ec_Hz = 20000;       // Частота Ш�?Ма (в микросек, min 9, max 65535)           [Q
+uint32_t ec_Hz = 20000;   //  Частота Ш�?Ма (в микросек, min 9, max 65535))         [Q
 
 
 typedef struct
@@ -998,12 +998,13 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
   hadc1.Init.LowPowerAutoWait = DISABLE;
   hadc1.Init.LowPowerAutoPowerOff = DISABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.NbrOfConversion = 5;
+  hadc1.Init.DiscontinuousConvMode = ENABLE;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T1_TRGO2;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
   hadc1.Init.DMAContinuousRequests = ENABLE;
