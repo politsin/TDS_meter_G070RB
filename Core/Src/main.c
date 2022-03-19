@@ -102,8 +102,8 @@ int32_t ecKoefB = 90;     //  Beta value                                        
 int32_t ecKoefC = 34;     //  С-value                                              [N
 int32_t ecKoefT = 1;      //  Ноль Koef Temperature                                [P
 
-uint32_t ec_Hz = 20000;   //  Частота Ш�?Ма (в микросек, min 9, max 65535))         [Q
-
+uint32_t ec_Hz = 24;   //  Частота Ш�?Ма (в микросек, min 9, max 65535))         [Q
+uint32_t skip_settings = 1;
 
 typedef struct
 {
@@ -303,7 +303,7 @@ int main(void)
   trans_to_usart(trans_str, len);
   #endif
 
-  if(data[0] > 0xFFFFFFF1) // если флеш пустая, записываем туда дефолтные значения
+  if(data[0] > 0xFFFFFFF1 || skip_settings == 1) // если флеш пустая, записываем туда дефолтные значения
   {
 	  data[0] = interval_ds18;    // 800
 	  data[1] = interval_ec;      // 500
@@ -397,8 +397,7 @@ int main(void)
 
   //MY_ADC1_Init(1);
   TIM1->PSC = 63;
-// TODO: TIM1->ARR = 2999; //ec_Hz;
-  TIM1->ARR = 9;
+  TIM1->ARR = ec_Hz;
   TIM1->CCR1 = TIM1->ARR;
   TIM1->CCR4 = TIM1->ARR;
   TIM1->EGR = TIM_EGR_UG;
@@ -1481,7 +1480,7 @@ static void MX_GPIO_Init(void)
 /*void MY_ADC1_Init(uint8_t numb)
 {
 
-	//HAL_TIM_OC_Stop(&htim1, TIM_CHANNEL_1); // запускает Ш�?М, и посылает триггер для запуска тим3
+	//HAL_TIM_OC_Stop(&htim1, TIM_CHANNEL_1); // запускает Ш�?М, и посылает триггер для запуска тим3
 	//HAL_TIMEx_OCN_Stop(&htim1, TIM_CHANNEL_1);
 
 	//HAL_TIM_Base_Stop(&htim3);
@@ -1552,7 +1551,7 @@ static void MX_GPIO_Init(void)
 
 	//HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buf, COUNT_REQUEST);
 	//HAL_TIM_Base_Start(&htim3);
-	//HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1); // запускает Ш�?М, и посылает триггер для запуска тим3
+	//HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1); // запускает Ш�?М, и посылает триггер для запуска тим3
 	//HAL_TIMEx_OCN_Start(&htim1, TIM_CHANNEL_1);
 }*/
 
