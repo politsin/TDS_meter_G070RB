@@ -54,7 +54,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
+ ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
 SPI_HandleTypeDef hspi1;
@@ -102,7 +102,7 @@ int32_t ecKoefB = 90;     //  Beta value                                        
 int32_t ecKoefC = 34;     //  С-value                                              [N
 int32_t ecKoefT = 1;      //  Ноль Koef Temperature                                [P
 
-uint32_t ec_Hz = 20000;       // Частота ШИМа (в микросек, min 9, max 65535)           [Q
+uint32_t ec_Hz = 20000;       // Частота Ш�?Ма (в микросек, min 9, max 65535)           [Q
 
 
 typedef struct
@@ -397,7 +397,8 @@ int main(void)
 
   //MY_ADC1_Init(1);
   TIM1->PSC = 63;
-  TIM1->ARR = 2999; //ec_Hz;
+// TODO: TIM1->ARR = 2999; //ec_Hz;
+  TIM1->ARR = 9;
   TIM1->CCR1 = TIM1->ARR;
   TIM1->CCR4 = TIM1->ARR;
   TIM1->EGR = TIM_EGR_UG;
@@ -934,6 +935,7 @@ void SystemClock_Config(void)
   /** Configure the main internal regulator output voltage
   */
   HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -951,6 +953,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -988,6 +991,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
+
   /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
   */
   hadc1.Instance = ADC1;
@@ -1000,7 +1004,6 @@ static void MX_ADC1_Init(void)
   hadc1.Init.LowPowerAutoPowerOff = DISABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.NbrOfConversion = 5;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T1_TRGO2;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
   hadc1.Init.DMAContinuousRequests = ENABLE;
@@ -1013,6 +1016,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_0;
@@ -1022,6 +1026,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_1;
@@ -1030,6 +1035,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_2;
@@ -1038,6 +1044,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_3;
@@ -1046,6 +1053,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_4;
@@ -1472,7 +1480,7 @@ static void MX_GPIO_Init(void)
 /*void MY_ADC1_Init(uint8_t numb)
 {
 
-	//HAL_TIM_OC_Stop(&htim1, TIM_CHANNEL_1); // запускает ШИМ, и посылает триггер для запуска тим3
+	//HAL_TIM_OC_Stop(&htim1, TIM_CHANNEL_1); // запускает Ш�?М, и посылает триггер для запуска тим3
 	//HAL_TIMEx_OCN_Stop(&htim1, TIM_CHANNEL_1);
 
 	//HAL_TIM_Base_Stop(&htim3);
@@ -1543,7 +1551,7 @@ static void MX_GPIO_Init(void)
 
 	//HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buf, COUNT_REQUEST);
 	//HAL_TIM_Base_Start(&htim3);
-	//HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1); // запускает ШИМ, и посылает триггер для запуска тим3
+	//HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1); // запускает Ш�?М, и посылает триггер для запуска тим3
 	//HAL_TIMEx_OCN_Start(&htim1, TIM_CHANNEL_1);
 }*/
 
@@ -1581,4 +1589,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-

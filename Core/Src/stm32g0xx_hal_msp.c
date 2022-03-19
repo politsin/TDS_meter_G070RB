@@ -99,6 +99,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
   /* USER CODE BEGIN ADC1_MspInit 0 */
 
   /* USER CODE END ADC1_MspInit 0 */
+
   /** Initializes the peripherals clocks
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
@@ -442,6 +443,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   /* USER CODE BEGIN USART1_MspInit 0 */
 
   /* USER CODE END USART1_MspInit 0 */
+
   /** Initializes the peripherals clocks
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
@@ -576,4 +578,3 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-
