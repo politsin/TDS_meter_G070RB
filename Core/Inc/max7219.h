@@ -28,23 +28,14 @@
 #define REG_DISPLAY_TEST     0x0F
 
 
-
 #define MAX7219M_CS_ON       (HAL_GPIO_WritePin(MAX7219M_CS_GPIO_Port, MAX7219M_CS_Pin, GPIO_PIN_RESET))
 #define MAX7219M_CS_OFF      (HAL_GPIO_WritePin(MAX7219M_CS_GPIO_Port, MAX7219M_CS_Pin, GPIO_PIN_SET))
 
 
-
-
-
 void max7219_init(uint8_t br);
 
-
-
-
-
-
-
-
+void max7219_setup();
+void max7219_loop();
 
 
 #endif /* INC_MAX7219_H_ */

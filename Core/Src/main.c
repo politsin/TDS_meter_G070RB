@@ -89,7 +89,7 @@ volatile uint8_t adc_count_full = 0;
 uint32_t interval_ds18 = 800; // миллисекунды, min 800                             [A800]
 uint32_t interval_ec = 500;   // миллисекунды, min 500                             [B
 
-uint32_t referenceVoltage = 2500;  // 2500mv (напряжение питания датчиков)         [C
+uint32_t referenceVoltage = 3500;  // 2500mv (напряжение питания датчиков)         [C
 
 uint32_t ntcR1 = 9600;    // 10kΩ voltage divider resistor value                   [D
 uint32_t ntcRo = 10000;   // 10kΩ R of Thermistor at 25 degree                     [E
@@ -102,7 +102,7 @@ int32_t ecKoefB = 90;     //  Beta value                                        
 int32_t ecKoefC = 34;     //  С-value                                              [N
 int32_t ecKoefT = 1;      //  Ноль Koef Temperature                                [P
 
-uint32_t ec_Hz = 24;   //  Частота Ш�?Ма (в микросек, min 9, max 65535))         [Q
+uint32_t ec_Hz = 99;   //  Частота Ш�?Ма (в микросек, min 9, max 65535))         [Q
 uint32_t skip_settings = 1;
 
 typedef struct
@@ -430,7 +430,7 @@ int main(void)
 
   HAL_TIM_Base_Start_IT(&htim17);
 
-  max7219_init(10);
+  max7219_setup();
 
   // 2507 = 3300/4095*3111
 
@@ -463,7 +463,7 @@ int main(void)
 		//uint16_t len = sprintf(trans_str, " %lu", DMA1_Channel1->CNDTR);
 		//trans_to_usart(trans_str, len);
 
-				//__HAL_DMA_GET_COUNTER(huart->hdmarx);
+		//__HAL_DMA_GET_COUNTER(huart->hdmarx);
 
 		//while(DMA1_Channel1->CNDTR > 0){}
 
@@ -520,8 +520,9 @@ int main(void)
 				//trans_to_usart(trans_str, len);
 			}
 
-			max7219_init(8);
+
 		}
+		max7219_loop();
 
 
 
