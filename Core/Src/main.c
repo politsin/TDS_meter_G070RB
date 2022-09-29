@@ -102,7 +102,7 @@ int32_t ecKoefB = 90; //  Beta value                                           [
 int32_t ecKoefC = 34; //  С-value                                              [N
 int32_t ecKoefT = 1; //  Ноль Koef Temperature                                 [P
 
-uint32_t ec_Hz = 99; //  Частота Ш�?Ма (в микросек, min 9, max 65535))         [Q
+uint32_t ec_Hz = 99; //  Частота ШиМа (в микросек, min 9, max 65535))         [Q
 uint32_t skip_settings = 1;
 
 typedef struct {

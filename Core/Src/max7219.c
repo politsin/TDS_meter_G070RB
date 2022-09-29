@@ -20,22 +20,23 @@ extern SPI_HandleTypeDef hspi1;
 static uint8_t decodeMode = 0x00;
 #define NUMBER_OF_DIGITS	8
 typedef enum {
-	NUM_0 = 0x00,
-	NUM_1 = 0x01,
-	NUM_2 = 0x02,
-	NUM_3 = 0x03,
-	NUM_4 = 0x04,
-	NUM_5 = 0x05,
-	NUM_6 = 0x06,
-	NUM_7 = 0x07,
-	NUM_8 = 0x08,
-	NUM_9 = 0x09,
-	MINUS = 0x0A,
-	LETTER_E = 0x0B,
-	LETTER_H = 0x0C,
-	LETTER_L = 0x0D,
-	LETTER_P = 0x0E,
-	BLANK = 0x0F
+	NUM_0 = 0b01111110,
+	NUM_1 = 0b00110000,
+	NUM_2 = 0b01101101,
+	NUM_3 = 0b01111001,
+	NUM_4 = 0b00110011,
+	NUM_5 = 0b01011011,
+	NUM_6 = 0b01011111,
+	NUM_7 = 0b01110000,
+	NUM_8 = 0b01111111,
+	NUM_9 = 0b01111011,
+	MINUS = 0b00000001,
+	LETTER_E = 0b01001111,
+	LETTER_C = 0b01001110,
+	LETTER_H = 0b00110111,
+	LETTER_L = 0b00001110,
+	LETTER_P = 0b01100111,
+	BLANK = 0b00000000
 } MAX7219_Numeric;
 void max7219_SendData(uint8_t addr, uint8_t data) {
 	MAX7219M_CS_ON;
@@ -70,14 +71,12 @@ void max7219_setup() {
 	max7219_Clean();
 }
 void max7219_loop() {
-	max7219_SendData(3, 0b10110000);
-	max7219_SendData(2, 0b01101101);
-	max7219_SendData(1, 0b01111001);
-	max7219_SendData(6, 0b00110011);
-	max7219_SendData(5, 0b01011011);
-	max7219_SendData(4, 0b01011111);
-//	max7219_SendData(8, 0);
-//	max7219_SendData(7, 0);
+	max7219_SendData(3, LETTER_E);
+	max7219_SendData(2, LETTER_C);
+	max7219_SendData(1, NUM_1);
+	max7219_SendData(6, LETTER_L);
+	max7219_SendData(5, LETTER_P);
+	max7219_SendData(4, BLANK);
 	HAL_Delay(400);
 	max7219_Clean();
 	HAL_Delay(100);
