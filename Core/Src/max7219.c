@@ -68,7 +68,7 @@ void max7219_setup() {
 	max7219_Turn_On();
 	max7219_SendData(REG_SCAN_LIMIT, NUMBER_OF_DIGITS - 1);
 	max7219_SetIntensivity(intensivity);
-	max7219_Clean();
+	// max7219_Clean();
 }
 void max7219_loop() {
 	max7219_SendData(3, LETTER_E);
@@ -77,40 +77,9 @@ void max7219_loop() {
 	max7219_SendData(6, LETTER_L);
 	max7219_SendData(5, LETTER_P);
 	max7219_SendData(4, BLANK);
-	HAL_Delay(400);
-	max7219_Clean();
 	HAL_Delay(100);
-}
-// --- OLD
-void max7219_init(uint8_t br) {
-	MAX7219M_CS_OFF;
-	HAL_Delay(100);
-	max7219_SendData(REG_INTENSITY, br);
-//	max7219_SendData(REG_SHUTDOWN, 0x01);
-	max7219_SendData(REG_DIGIT_0, 0x01);
-	max7219_SendData(REG_DIGIT_1, 0x02);
-	max7219_SendData(REG_DIGIT_2, 0x04);
-	max7219_SendData(REG_DIGIT_3, 0x08);
-	max7219_SendData(REG_DIGIT_4, 0x0F);
-	max7219_SendData(REG_DIGIT_5, 0x10);
-	max7219_SendData(REG_DIGIT_6, 0x12);
-	max7219_SendData(REG_DIGIT_7, 0x14);
-
-//	if (false) {
-//		MAX7219M_CS_ON;
-//
-//		max7219_send_to_all(REG_SHUTDOWN, 0x01); // restart
-//	    max7219_send_to_all(REG_DECODE_MODE, 0x00); // use normal mode
-//	    max7219_send_to_all(REG_SCAN_LIMIT, 0x07); // use all lines
-//	    max7219_set_brightness(br);
-//	    max7219_clear();
-//
-//	    max7219_send_to_all(REG_DIGIT_0, 0x01);
-//	    max7219_send_to_all(REG_DIGIT_1, 0x02);
-//	    max7219_send_to_all(REG_DIGIT_3, 0x02);
-//	    MAX7219M_CS_OFF;
-//	}
-
+//	max7219_Clean();
+// 	HAL_Delay(100);
 }
 
 void max7219_set_brightness(uint8_t br) {
